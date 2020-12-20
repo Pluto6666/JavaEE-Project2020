@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("api/")
 public class OrderController {
     @Autowired
     private OrderService orderService;

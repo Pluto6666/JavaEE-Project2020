@@ -11,7 +11,7 @@ import java.util.UUID;
 public class FileService {
     public String uploadFile(MultipartFile file){
         String newname=Rename(file.getOriginalFilename());
-        String path="C:/MyFiles/"+newname;
+        String path="/home/javaee/images/"+newname;
         File dest=new File(path);
         if(!dest.getParentFile().exists()){
             dest.getParentFile().mkdir();
