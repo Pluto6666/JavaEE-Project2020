@@ -44,4 +44,10 @@ public class OrderController {
         System.out.println(detailorder.toString());
         return orderService.payOrder(detailorder);
     }
+
+    @PostMapping(value="order/getall",produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Format findallorders(){
+        return orderService.findallorders();
+    }
 }

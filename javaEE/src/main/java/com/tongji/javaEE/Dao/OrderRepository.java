@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface OrderRepository extends JpaRepository<Order_data, String>{
     List<Order_data> findByBuyerId(String buyerId);
     List<Order_data> findByCarVin(String carVin);
+    List<Order_data> findAll();
 
     @Modifying
     @Transactional
