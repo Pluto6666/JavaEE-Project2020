@@ -16,6 +16,9 @@ public interface AuditDataRepository extends JpaRepository<auditData,String>{
    List<auditData> findByCarVin(String carVin);
    List<auditData> findAllByUserId(String userId);
 
+   @Query(value="select * from audit_data a where a.status=2",nativeQuery = true)
+   List<auditData> findAllPass();
+
    // @Override
     //public Audit_data findByCarVin(String carVin);
 }

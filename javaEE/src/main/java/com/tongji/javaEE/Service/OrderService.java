@@ -47,6 +47,7 @@ public class OrderService {
             carDataRepository.save(list.get(0));
             List<auditData> list1=auditRepository.findByCarVin(order.getCarVin());
             list1.get(0).setStatus(3);
+            auditRepository.save(list1.get(0));
             cartRepository.deleteByCarVin(order.getCarVin());
             response.setCode(1);
             response.setMessage("已成功下单");
@@ -76,10 +77,12 @@ public class OrderService {
         List<carData> list1=carDataRepository.findByCarVin(carVin);
         if(list1.size()!=0){
             list1.get(0).setIforder(0);
+            carDataRepository.save(list1.get(0));
         }
         List<auditData> list2=auditRepository.findByCarVin(carVin);
         if(list2.size()!=0){
             list2.get(0).setStatus(2);
+            auditRepository.save(list2.get(0));
         }
         response.setCode(1);
         response.setMessage("订单撤回成功");
@@ -128,6 +131,15 @@ public class OrderService {
         payresult.setMoney(money.get(0).getMoney());
         list4.add(payresult);
         response.setData(list4);
+        return response;
+    }
+
+    public Format findallorders(){
+        List<Order_data> list=orderRepository.findAll();
+        Format response=new Format<Order_data>();
+        response.setCode(1);
+        response.setMessage("查询成功");
+        response.setData(list);
         return response;
     }
 }

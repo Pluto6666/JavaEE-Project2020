@@ -48,4 +48,8 @@ public class AuditDataController {
     public messageReturn recallAudit(@PathVariable(value = "carVin") String carVin){
         return auditDataService.recallAudit(carVin);
     }
+    @RequestMapping(value = "/bypage/{page}",method = RequestMethod.GET)
+    public dataReturn pageAudit(@PathVariable(value = "page") int page){
+        return auditDataService.pageAudit(page);
+    }
 }

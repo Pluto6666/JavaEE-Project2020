@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long>{
-    @Query("SELECT new com.tongji.javaEE.Domain.Mycart(t.carVin, t.carCondition, t.price) FROM carData as t inner join Cart as a on a.carVin=t.carVin WHERE a.userId = :userId")
+    @Query("SELECT new com.tongji.javaEE.Domain.Mycart(t.carVin, t.carCondition, t.price,t.userId) FROM carData as t inner join Cart as a on a.carVin=t.carVin WHERE a.userId = :userId")
     public List<Mycart> findCarDataByUserId(@Param("userId") String UserId);
 
     List<Cart> findCartByCarVinEqualsAndUserIdEquals(String carVin,String userId);

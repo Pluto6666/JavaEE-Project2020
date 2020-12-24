@@ -161,4 +161,28 @@ public class AuditDataService {
         return result;
     }
 
+    //分页查询出售信息
+    public dataReturn pageAudit(int page){
+        dataReturn result = new dataReturn();
+        List<auditData> aD = auditDataRepository.findAllPass();
+        List<auditData> rP = new ArrayList<>(4);
+        result.code = aD.size();
+        System.out.println(aD.size());
+
+        if(page*4<=aD.size()){
+            for(int i=0;i<4;i++){
+                rP.add(aD.get((page-1)*4+i));
+            }
+            result.data = rP;
+        } else if(page*4>aD.size()&&(page-1)*4<aD.size()) {
+            for(int i=0;i<aD.size()-4*(page-1);i++){
+                rP.add(aD.get((page-1)*4+i));
+            }
+            result.data = rP;
+        } else {
+            result.message="该页为空！";
+        }
+        return result;
+    }
+
 }

@@ -1,7 +1,9 @@
 package com.tongji.javaEE.Controller;
 
 
+import com.tongji.javaEE.Dao.MoneyRepository;
 import com.tongji.javaEE.Dao.UserRepository;
+import com.tongji.javaEE.Domain.Moneydata;
 import com.tongji.javaEE.Util.DataReturnMessage;
 import com.tongji.javaEE.Util.ReturnMessage;
 import com.tongji.javaEE.Domain.User;
@@ -17,6 +19,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MoneyRepository moneyRepository;
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
@@ -51,10 +55,17 @@ public class UserController {
             return result;
         }
 
+
         User reg_user=new User(regQO);
         userRepository.save(reg_user);
         result.setCode(1);
         result.setMessage("注册成功");
+
+        //分配资金
+        Moneydata newMoney = new Moneydata();
+        newMoney.setUserId(regQO.user_id);
+        newMoney.setMoney(1000000);
+        moneyRepository.save(newMoney);
 
         return result;
     }
